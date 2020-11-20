@@ -4,6 +4,8 @@ import APIService
 import DogsAdapter
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.apidog.*
@@ -21,6 +23,15 @@ class ApiDog : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQuery
         super.onCreate(savedInstanceState)
         setContentView(R.layout.apidog)
         searchBreed.setOnQueryTextListener(this)
+
+
+
+        btnfloating.setOnClickListener{
+            SharedApp.prefs.datosUsuario = ""
+            SharedApp.prefs.datosPassword = ""
+            onBackPressed()
+            Toast.makeText(this, "Se ha deslogeado exitosamente", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getRetrofit(): Retrofit {
