@@ -4,6 +4,7 @@ package com.everis.appires
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.service.autofill.OnClickAction
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -23,6 +24,7 @@ class registro: AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun registrarUsuario() {
+        // VISTA DE REGISTRO DE USUARIO
         val welcome = findViewById<TextView>(R.id.bienvenida)
         welcome.text = "Registro"
 
@@ -41,24 +43,23 @@ class registro: AppCompatActivity() {
         btnSave.visibility = View.VISIBLE
 
         btnSave.setOnClickListener {
-
-            prefs.datosNombre = etNombre.text.toString()
-            prefs.datosUsuario = etUsuario.text.toString()
-            prefs.datosCorreo = etCorreo.text.toString()
-            prefs.datosPassword = etPassword.text.toString()
-            /*prefs.mutableProfile = mutableListOf(userProfile(
-                        nombreProfile = etNombre.text.toString(),
-                        usuarioProfile = etUsuario.text.toString(),
-                        correoProfile = etCorreo.text.toString(),
-                        passwordProfile = etPassword.text.toString()
-                    ))*/
-
-
-            if (prefs.datosUsuario!!.isNotEmpty() && prefs.datosNombre!!.isNotEmpty() &&
-                prefs.datosPassword!!.isNotEmpty() && prefs.datosCorreo!!.isNotEmpty()
-            ) {
+                //BOTON DE ACEPTAR REGISTRO
+            if (etNombre.text.toString().isNotEmpty() && etUsuario.text.toString().isNotEmpty() &&
+                etCorreo.text.toString().isNotEmpty() && etPassword.text.toString().isNotEmpty()) {
+                //VALIDA QUE TODOS LOS CAMPOS NO ESTEN VACIOS Y RETORNA A LA VISTA DE LOGIN
+                prefs.datosNombre = etNombre.text.toString()
+                prefs.datosUsuario = etUsuario.text.toString()
+                prefs.datosCorreo = etCorreo.text.toString()
+                prefs.datosPassword = etPassword.text.toString()
+                /*prefs.mutableProfile = mutableListOf(userProfile(
+                            nombreProfile = etNombre.text.toString(),
+                            usuarioProfile = etUsuario.text.toString(),
+                            correoProfile = etCorreo.text.toString(),
+                            passwordProfile = etPassword.text.toString()))*/
                 Toast.makeText(this, "Registro ha sido Exitoso", Toast.LENGTH_SHORT).show()
+                onBackPressed()
             } else {
+                // ENVIA UN MENSAJE
                 Toast.makeText(this, "Faltan datos", Toast.LENGTH_SHORT).show()
             }
 
@@ -67,6 +68,7 @@ class registro: AppCompatActivity() {
     }
 
     fun cancelarRegistro(){
+        //CANCELA EL REGISTRO Y ENVIA A LA VISTA DE LOGIN
         val btnLoggout = findViewById<Button>(R.id.btnCancel)
         btnLoggout.setOnClickListener{
             prefs.datosUsuario = ""

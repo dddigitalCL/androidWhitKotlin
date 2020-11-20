@@ -2,9 +2,10 @@ package com.everis.appires
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.util.stream.Collectors.toSet
 
 class Prefs (context: Context){
+    // SE ENCARGA DE GUARDAR TODAS LAS VARIABLES GET Y SET QUE UTILIZAREMOS
+    // EN LAS SHARED PREFERENCE
     val PREFS_NAME = "preferences"
     val SHARED_NAME = "shared_name"
     val SHARED_PASS = "shared_pass"
